@@ -10,7 +10,9 @@ export default function Preview() {
 
   return (
     <Wrap ref={ref}>
-      <PreviewContent style={{ width, height }}>Thumnail~</PreviewContent>
+      <PreviewContent id="thumbnail" style={{ width, height }}>
+        Thumbnail~
+      </PreviewContent>
     </Wrap>
   );
 }

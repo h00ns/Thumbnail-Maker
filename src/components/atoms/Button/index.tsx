@@ -4,13 +4,22 @@ import styled from "@emotion/styled";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
+  fullWidth?: boolean;
 }
 
-export default function Button({ text, ...buttonHtmlAttributes }: Props) {
-  return <Component {...buttonHtmlAttributes}>{text}</Component>;
+export default function Button({
+  text,
+  fullWidth = false,
+  ...buttonHtmlAttributes
+}: Props) {
+  return (
+    <Component fullWidth={fullWidth} {...buttonHtmlAttributes}>
+      {text}
+    </Component>
+  );
 }
 
-const Component = styled.button`
+const Component = styled.button<{ fullWidth: boolean }>`
   padding: 10px 12px;
   border: none;
   border-radius: ${Radius.MEDIUM};
@@ -20,6 +29,8 @@ const Component = styled.button`
 
   background: ${primary.blue};
   color: ${white};
+
+  ${(props) => props.fullWidth && "width: 100%;"}
 
   &:hover {
     opacity: 0.8;

@@ -24,7 +24,11 @@ export default function PartCard({
 
   const isSelect = selectIdx === idx;
   return (
-    <Component {...divHtmlAttributes} onClick={() => setSelectIdx(idx)}>
+    <Component
+      {...divHtmlAttributes}
+      onClick={() => setSelectIdx(idx)}
+      isSelect={isSelect}
+    >
       <Header>
         <NumberBox>{idx}</NumberBox>
         <Title variant="sh3">{title}</Title>
@@ -41,16 +45,21 @@ export default function PartCard({
   );
 }
 
-const Component = styled.div`
+const Component = styled.div<{ isSelect: boolean }>`
   padding: 8px 12px;
   background: ${white};
   box-shadow: ${Shadow.MEDIUM};
   border-radius: ${Radius.MEDIUM};
-  cursor: pointer;
 
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  ${({ isSelect }) =>
+    !isSelect &&
+    `
+    cursor: pointer;
+  `}
 `;
 
 const Header = styled.div`

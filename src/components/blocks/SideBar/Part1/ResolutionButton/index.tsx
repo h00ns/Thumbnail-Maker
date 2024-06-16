@@ -31,10 +31,16 @@ const Component = styled.div<{ isSelect: boolean }>`
   border: 1px solid ${gray.gray3};
   border-radius: ${Radius.SMALL};
   text-align: center;
+  cursor: pointer;
 
   ${({ isSelect }) =>
-    isSelect &&
+    isSelect
+      ? `
+    background: ${gray.gray2};
     `
-    background: ${gray.gray1};
+      : `
+    &:hover {
+      background: ${gray.gray1};
+    }
   `}
 `;

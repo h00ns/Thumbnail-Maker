@@ -1,13 +1,28 @@
 import styled from "@emotion/styled";
 import { gray, white } from "@/styles/Color";
 import Button from "@/components/atoms/Button";
+import domtoimage from "dom-to-image";
+import { saveAs } from "file-saver";
 
 export default function Header() {
+  /** 썸네일 다운로드 */
+  const handleDownloadThumbnail = () => {
+    const thumbnail = document.querySelector("#thumbnail");
+
+    if (!thumbnail) {
+      return;
+    }
+
+    domtoimage.toBlob(thumbnail).then((blob) => {
+      saveAs(blob, "Thumbnail.png");
+    });
+  };
+
   return (
     <Wrap>
-      <Title>Thumnail-Maker</Title>
+      <Title>Thumbnail-Maker</Title>
 
-      <Button text="다운로드" />
+      <Button text="다운로드" onClick={handleDownloadThumbnail} />
     </Wrap>
   );
 }
