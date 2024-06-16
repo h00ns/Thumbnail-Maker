@@ -19,6 +19,7 @@ const Wrap = styled.div`
   padding: 12px 16px;
   box-sizing: border-box;
   box-shadow: ${Shadow.SMALL};
+  overflow-y: auto;
 
   display: flex;
   flex-direction: column;

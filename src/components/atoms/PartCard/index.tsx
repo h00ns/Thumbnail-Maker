@@ -6,9 +6,10 @@ import styled from "@emotion/styled";
 import { useAtom } from "jotai";
 import Typography from "../Typography";
 import Divider from "../Divider";
+import { SelectIdxType } from "@/store/types";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  idx: 1 | 2 | 3 | 4;
+  idx: SelectIdxType;
   title: string;
   children?: React.ReactNode;
 }
@@ -20,8 +21,6 @@ export default function PartCard({
   ...divHtmlAttributes
 }: Props) {
   const [selectIdx, setSelectIdx] = useAtom(SelectIdxAtom);
-
-  console.log(selectIdx);
 
   const isSelect = selectIdx === idx;
   return (
