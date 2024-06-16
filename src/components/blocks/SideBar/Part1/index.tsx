@@ -1,10 +1,10 @@
-import PartCard from "@/components/atoms/PartCard";
 import styled from "@emotion/styled";
 import ResolutionButton from "./ResolutionButton";
 import { Resolution } from "@/store/types";
 import Button from "@/components/atoms/Button";
 import { useAtom } from "jotai";
 import { SelectIdxAtom } from "@/store";
+import FormCard from "@/components/atoms/FormCard";
 
 export default function Part1() {
   const [, setSelectIdx] = useAtom(SelectIdxAtom);
@@ -15,7 +15,7 @@ export default function Part1() {
   };
 
   return (
-    <PartCard idx={1} title="해상도">
+    <FormCard idx={1} title="해상도">
       <Form>
         <ResolutionButton text="16:9" value={Resolution.RATIO_16_9} />
         <ResolutionButton text="9:16" value={Resolution.RATIO_9_16} />
@@ -29,7 +29,7 @@ export default function Part1() {
         fullWidth
         onClickCapture={handleNextIdx}
       />
-    </PartCard>
+    </FormCard>
   );
 }
 

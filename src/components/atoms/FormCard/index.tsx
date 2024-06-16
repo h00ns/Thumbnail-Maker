@@ -14,7 +14,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export default function PartCard({
+export default function FormCard({
   idx,
   title,
   children,
