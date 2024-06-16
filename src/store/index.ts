@@ -1,3 +1,8 @@
 import { atom } from "jotai";
+import { Resolution, ResolutionType, SelectIdxType } from "./types";
 
-export const SelectIdxAtom = atom<1 | 2 | 3 | 4>(1);
+// 선택중인 form idx
+export const SelectIdxAtom = atom<SelectIdxType>(1);
+
+// 해상도
+export const ResolutionAtom = atom<ResolutionType>(Resolution.RATIO_16_9);
