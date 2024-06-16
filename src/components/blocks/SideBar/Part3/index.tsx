@@ -1,9 +1,9 @@
-import PartCard from "@/components/atoms/PartCard";
+import FormCard from "@/components/atoms/FormCard";
 
 export default function Part3() {
   return (
-    <PartCard idx={3} title="내용">
+    <FormCard idx={3} title="내용">
       내용 영역
-    </PartCard>
+    </FormCard>
   );
 }

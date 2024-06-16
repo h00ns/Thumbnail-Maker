@@ -1,8 +1,10 @@
 import Button from "@/components/atoms/Button";
-import PartCard from "@/components/atoms/PartCard";
+import ColorPicker from "@/components/atoms/ColorPicker";
+import FormCard from "@/components/atoms/FormCard";
 import Radio from "@/components/atoms/Radio";
 import Typography from "@/components/atoms/Typography";
 import { SelectIdxAtom } from "@/store";
+import { red } from "@/styles/Color";
 import styled from "@emotion/styled";
 import { useAtom } from "jotai";
 import { useState } from "react";
@@ -19,13 +21,16 @@ export default function Part2() {
     setSelectIdx(3);
   };
 
+  const [color, setColor] = useState<string>("#ffffff");
+
   return (
-    <PartCard idx={2} title="배경">
+    <FormCard idx={2} title="배경">
       <Form>
         <Title onClick={() => setType("solid")}>
           <Radio value={"solid"} checked={type === "solid"} />
           <Typography>단일 색상</Typography>
         </Title>
+        <ColorPicker value={color} handleChange={(v) => setColor(v)} />
 
         <Title onClick={() => setType("gradation")}>
           <Radio value={"gradation"} checked={type === "gradation"} />
@@ -44,7 +49,7 @@ export default function Part2() {
         fullWidth
         onClickCapture={handleNextIdx}
       />
-    </PartCard>
+    </FormCard>
   );
 }
 
