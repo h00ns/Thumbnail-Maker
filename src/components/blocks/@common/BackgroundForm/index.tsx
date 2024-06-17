@@ -10,6 +10,8 @@ import { BackgroundType } from "@/store/types";
 import { Radius } from "@/styles/Radius";
 import { Shadow } from "@/styles/Shadow";
 import { gray } from "@/styles/Color";
+import Divider from "@/components/atoms/Divider";
+import Border from "./Border";
 
 const INITIAL_BACKGROUND = "#ffffff";
 
@@ -38,6 +40,7 @@ export default function BackgroundForm() {
 
   return (
     <Layout>
+      {/* 단일 색상 */}
       <Title onClick={() => handleBackgroundType("solid")}>
         <Radio value={"solid"} checked={backgroundType === "solid"} />
         <Typography>단일 색상</Typography>
@@ -45,10 +48,11 @@ export default function BackgroundForm() {
       {backgroundType === "solid" && (
         <ColorPicker
           value={background}
-          handleChange={(v) => setBackground(v)}
+          handleChange={(value) => setBackground(value)}
         />
       )}
 
+      {/* 그라데이션 */}
       <Title onClick={() => handleBackgroundType("gradation")}>
         <Radio value={"gradation"} checked={backgroundType === "gradation"} />
         <Typography>그라데이션</Typography>
@@ -68,6 +72,7 @@ export default function BackgroundForm() {
         </GradationItemWrap>
       )}
 
+      {/* 이미지 */}
       <Title onClick={() => handleBackgroundType("image")}>
         <Radio value={"image"} checked={backgroundType === "image"} />
         <Typography>이미지</Typography>
@@ -84,6 +89,11 @@ export default function BackgroundForm() {
           )}
         </>
       )}
+
+      <Divider />
+
+      {/* 외곽선 */}
+      <Border />
     </Layout>
   );
 }

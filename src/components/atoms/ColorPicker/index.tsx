@@ -69,6 +69,7 @@ const PaletteWrap = styled.div`
   background: ${white};
   border-radius: ${Radius.MEDIUM};
   box-shadow: ${Shadow.MEDIUM};
+  z-index: 999;
 
   position: absolute;
   top: 40px;

@@ -15,3 +15,5 @@ export const ResolutionAtom = atom<ResolutionType>(Resolution.RATIO_16_9);
 // 배경
 export const BackgroundAtom = atom<string>("#ffffff");
 export const BackgroundTypeAtom = atom<BackgroundType>("solid");
+export const UseBorderAtom = atom<boolean>(false);
+export const BorderAtom = atom<string>("#e1c8c8");

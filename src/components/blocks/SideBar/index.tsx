@@ -17,7 +17,7 @@ export default function SideBar() {
         <ResolutionForm />
 
         <Button
-          style={{ marginTop: "8px" }}
+          style={{ marginTop: 16 }}
           text="다음으로"
           fullWidth
           onClickCapture={() => setSelectIdx(2)}
@@ -28,7 +28,7 @@ export default function SideBar() {
         <BackgroundForm />
 
         <Button
-          style={{ marginTop: "8px" }}
+          style={{ marginTop: 16 }}
           text="다음으로"
           fullWidth
           onClickCapture={() => setSelectIdx(3)}
