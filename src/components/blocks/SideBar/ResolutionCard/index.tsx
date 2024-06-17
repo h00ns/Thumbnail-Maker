@@ -6,7 +6,8 @@ import { useAtom } from "jotai";
 import { SelectIdxAtom } from "@/store";
 import FormCard from "@/components/atoms/FormCard";
 
-export default function Part1() {
+/** 해상도 */
+export default function ResolutionCard() {
   const [, setSelectIdx] = useAtom(SelectIdxAtom);
 
   /** 다음으로 클릭 */

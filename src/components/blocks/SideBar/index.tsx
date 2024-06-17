@@ -1,15 +1,15 @@
 import { Shadow } from "@/styles/Shadow";
 import styled from "@emotion/styled";
-import Part1 from "./Part1";
-import Part2 from "./Part2";
-import Part3 from "./Part3";
+import ResolutionCard from "./ResolutionCard";
+import BackgroundCard from "./BackgroundCard";
+import ContentCard from "./ContentCard";
 
 export default function SideBar() {
   return (
     <Wrap>
-      <Part1 />
-      <Part2 />
-      <Part3 />
+      <ResolutionCard />
+      <BackgroundCard />
+      <ContentCard />
     </Wrap>
   );
 }
