@@ -23,7 +23,10 @@ export const useGetPreviewSize = (
 
       const { width: refWidth, height: refHeight } =
         ref.current.getBoundingClientRect();
-      const PADDING = 112;
+
+      const PC_PADDING = 112;
+      const MOBILE_PADDING = 24;
+      const PADDING = refWidth > 480 ? PC_PADDING : MOBILE_PADDING;
 
       const width = refWidth - PADDING;
       const height = refHeight - PADDING;

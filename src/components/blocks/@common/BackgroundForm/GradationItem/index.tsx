@@ -11,16 +11,16 @@ export default function GradationItem({ value }: Props) {
   const [, setBackground] = useAtom(BackgroundAtom);
 
   return (
-    <Layout
+    <Component
       style={{ background: value }}
       onClick={() => setBackground(value)}
     />
   );
 }
 
-const Layout = styled.div`
+const Component = styled.div`
   height: 32px;
-  border-radius: ${Radius.MEDIUM}
+  border-radius: ${Radius.MEDIUM};
   cursor: pointer;
 
   &:hover {
