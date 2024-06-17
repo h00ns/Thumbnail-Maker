@@ -2,15 +2,20 @@ import { gray } from "@/styles/Color";
 import styled from "@emotion/styled";
 import { useRef } from "react";
 import { useGetPreviewSize } from "./Preview.hooks";
+import { BackgroundAtom } from "@/store";
+import { useAtom } from "jotai";
+import { Shadow } from "@/styles/Shadow";
 
 export default function Preview() {
   const ref = useRef<HTMLDivElement>(null);
+
+  const [background] = useAtom(BackgroundAtom);
 
   const { width, height } = useGetPreviewSize(ref);
 
   return (
     <Wrap ref={ref}>
-      <PreviewContent id="thumbnail" style={{ width, height }}>
+      <PreviewContent id="thumbnail" style={{ width, height, background }}>
         Thumbnail~
       </PreviewContent>
     </Wrap>
@@ -29,6 +34,6 @@ const Wrap = styled.div`
 `;
 
 const PreviewContent = styled.div`
-  border: 1px solid red;
   width: 100%;
+  box-shadow: ${Shadow.MEDIUM};
 `;

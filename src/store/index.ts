@@ -6,3 +6,6 @@ export const SelectIdxAtom = atom<SelectIdxType>(1);
 
 // 해상도
 export const ResolutionAtom = atom<ResolutionType>(Resolution.RATIO_16_9);
+
+// 배경
+export const BackgroundAtom = atom<string>('#ffffff');
