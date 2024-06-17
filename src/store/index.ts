@@ -1,5 +1,10 @@
 import { atom } from "jotai";
-import { Resolution, ResolutionType, SelectIdxType } from "./types";
+import {
+  BackgroundType,
+  Resolution,
+  ResolutionType,
+  SelectIdxType,
+} from "./types";
 
 // 선택중인 form idx
 export const SelectIdxAtom = atom<SelectIdxType>(1);
@@ -8,4 +13,5 @@ export const SelectIdxAtom = atom<SelectIdxType>(1);
 export const ResolutionAtom = atom<ResolutionType>(Resolution.RATIO_16_9);
 
 // 배경
-export const BackgroundAtom = atom<string>('#ffffff');
+export const BackgroundAtom = atom<string>("#ffffff");
+export const BackgroundTypeAtom = atom<BackgroundType>("solid");

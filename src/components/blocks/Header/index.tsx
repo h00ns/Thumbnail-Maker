@@ -3,6 +3,7 @@ import { gray, white } from "@/styles/Color";
 import Button from "@/components/atoms/Button";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
+import LogoImg from "@/assets/Logo.png";
 
 export default function Header() {
   /** 썸네일 다운로드 */
@@ -20,7 +21,7 @@ export default function Header() {
 
   return (
     <Wrap>
-      <Title>Thumbnail-Maker</Title>
+      <Logo src={LogoImg} alt="logo" />
 
       <Button text="다운로드" onClick={handleDownloadThumbnail} />
     </Wrap>
@@ -37,8 +38,6 @@ const Wrap = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h1`
-  font-size: 32px;
-  line-height: 40px;
-  margin: 0;
+const Logo = styled.img`
+  height: 40px;
 `;

@@ -5,6 +5,7 @@ import FormSection from "./FormSection";
 import ResolutionForm from "../@common/ResolutionForm";
 import Button from "@/components/atoms/Button";
 import BackgroundForm from "../@common/BackgroundForm";
+import ContentForm from "../@common/ContentForm";
 
 export default function Footer() {
   const [selectIdx, setSelectIdx] = useAtom(SelectIdxAtom);
@@ -27,6 +28,7 @@ export default function Footer() {
 
             <ButtonWrap>
               <Button
+                variant="outline"
                 text="이전으로"
                 fullWidth
                 onClick={() => setSelectIdx(1)}
@@ -44,6 +46,8 @@ export default function Footer() {
       {selectIdx === 3 && (
         <FormSection idx={3} title="내용">
           <ContentWrap>
+            <ContentForm />
+
             <Button text="이전으로" fullWidth onClick={() => setSelectIdx(2)} />
           </ContentWrap>
         </FormSection>
