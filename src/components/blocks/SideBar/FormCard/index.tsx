@@ -4,31 +4,22 @@ import { Radius } from "@/styles/Radius";
 import { Shadow } from "@/styles/Shadow";
 import styled from "@emotion/styled";
 import { useAtom } from "jotai";
-import Typography from "../Typography";
-import Divider from "../Divider";
 import { SelectIdxType } from "@/store/types";
+import Divider from "@/components/atoms/Divider";
+import Typography from "@/components/atoms/Typography";
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface Props {
   idx: SelectIdxType;
   title: string;
   children?: React.ReactNode;
 }
 
-export default function FormCard({
-  idx,
-  title,
-  children,
-  ...divHtmlAttributes
-}: Props) {
+export default function FormCard({ idx, title, children }: Props) {
   const [selectIdx, setSelectIdx] = useAtom(SelectIdxAtom);
 
   const isSelect = selectIdx === idx;
   return (
-    <Component
-      {...divHtmlAttributes}
-      onClick={() => setSelectIdx(idx)}
-      isSelect={isSelect}
-    >
+    <Component onClick={() => setSelectIdx(idx)} isSelect={isSelect}>
       <Header>
         <NumberBox>{idx}</NumberBox>
         <Title variant="sh3">{title}</Title>

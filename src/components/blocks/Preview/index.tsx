@@ -5,6 +5,7 @@ import { useGetPreviewSize } from "./Preview.hooks";
 import { BackgroundAtom } from "@/store";
 import { useAtom } from "jotai";
 import { Shadow } from "@/styles/Shadow";
+import { mq } from "@/styles/Breakpoint";
 
 export default function Preview() {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,6 +32,10 @@ const Wrap = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+
+  ${mq["md"]} {
+    padding: 12px;
+  }
 `;
 
 const PreviewContent = styled.div`
