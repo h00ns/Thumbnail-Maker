@@ -7,6 +7,11 @@ import { useAtom } from "jotai";
 import GradationItem from "./GradationItem";
 import FileUploader from "@/components/atoms/FileUploader";
 import { BackgroundType } from "@/store/types";
+import { Radius } from "@/styles/Radius";
+import { Shadow } from "@/styles/Shadow";
+import { gray } from "@/styles/Color";
+
+const INITIAL_BACKGROUND = "#ffffff";
 
 export default function BackgroundForm() {
   const [backgroundType, setBackgroundType] = useAtom(BackgroundTypeAtom);
@@ -17,11 +22,18 @@ export default function BackgroundForm() {
     setBackgroundType(value);
 
     if (value === "solid") {
-      setBackground("#ffffff");
+      setBackground(INITIAL_BACKGROUND);
     }
     if (value === "gradation") {
       setBackground("linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)");
     }
+    if (value === "image") {
+      setBackground(INITIAL_BACKGROUND);
+    }
+  };
+
+  const handleImageDelete = () => {
+    setBackground(INITIAL_BACKGROUND);
   };
 
   return (
@@ -60,7 +72,18 @@ export default function BackgroundForm() {
         <Radio value={"image"} checked={backgroundType === "image"} />
         <Typography>이미지</Typography>
       </Title>
-      {backgroundType === "image" && <FileUploader />}
+      {backgroundType === "image" && (
+        <>
+          {background === INITIAL_BACKGROUND ? (
+            <FileUploader />
+          ) : (
+            <ImgWrap>
+              <Img style={{ backgroundImage: background }} />
+              <ImgDeleteButton onClick={handleImageDelete} />
+            </ImgWrap>
+          )}
+        </>
+      )}
     </Layout>
   );
 }
@@ -90,4 +113,34 @@ const GradationItemWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
+`;
+
+const ImgWrap = styled.div`
+  width: fit-content;
+  position: relative;
+`;
+
+const Img = styled.div`
+  width: 64px;
+  height: 64px;
+  box-shadow: ${Shadow.MEDIUM};
+  border-radius: ${Radius.MEDIUM};
+  background-size: cover;
+  background-position: center center;
+`;
+
+const ImgDeleteButton = styled.div`
+  width: 18px;
+  height: 18px;
+  border-radius: ${Radius.MEDIUM};
+  background: ${gray.gray2};
+  cursor: pointer;
+
+  position: absolute;
+  top: -9px;
+  right: -9px;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;

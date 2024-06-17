@@ -14,9 +14,17 @@ export default function Preview() {
 
   const { width, height } = useGetPreviewSize(ref);
 
+  // base64 포함시 이미지로 판단
+  const backgroundKey = background.includes("base64")
+    ? "backgroundImage"
+    : "background";
+
   return (
     <Wrap ref={ref}>
-      <PreviewContent id="thumbnail" style={{ width, height, background }}>
+      <PreviewContent
+        id="thumbnail"
+        style={{ width, height, [backgroundKey]: background }}
+      >
         Thumbnail~
       </PreviewContent>
     </Wrap>
@@ -41,4 +49,6 @@ const Wrap = styled.div`
 const PreviewContent = styled.div`
   width: 100%;
   box-shadow: ${Shadow.MEDIUM};
+  background-size: cover;
+  background-position: center center;
 `;
