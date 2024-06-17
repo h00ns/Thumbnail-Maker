@@ -10,3 +10,5 @@ export const Resolution = {
 } as const;
 
 export type ResolutionType = (typeof Resolution)[keyof typeof Resolution];
+
+export type BackgroundType = "solid" | "gradation" | "image";

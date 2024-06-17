@@ -6,6 +6,7 @@ import ResolutionForm from "../@common/ResolutionForm";
 import Button from "@/components/atoms/Button";
 import BackgroundForm from "../@common/BackgroundForm";
 import FormCard from "./FormCard";
+import ContentForm from "../@common/ContentForm";
 
 export default function SideBar() {
   const [, setSelectIdx] = useAtom(SelectIdxAtom);
@@ -34,7 +35,9 @@ export default function SideBar() {
         />
       </FormCard>
 
-      <FormCard idx={3} title="내용"></FormCard>
+      <FormCard idx={3} title="내용">
+        <ContentForm />
+      </FormCard>
     </Wrap>
   );
 }

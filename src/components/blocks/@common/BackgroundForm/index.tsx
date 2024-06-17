@@ -1,23 +1,20 @@
 import ColorPicker from "@/components/atoms/ColorPicker";
 import Radio from "@/components/atoms/Radio";
 import Typography from "@/components/atoms/Typography";
-import { BackgroundAtom } from "@/store";
+import { BackgroundAtom, BackgroundTypeAtom } from "@/store";
 import styled from "@emotion/styled";
 import { useAtom } from "jotai";
-import { useState } from "react";
 import GradationItem from "./GradationItem";
 import FileUploader from "@/components/atoms/FileUploader";
-
-type BackgroundType = "solid" | "gradation" | "image";
+import { BackgroundType } from "@/store/types";
 
 export default function BackgroundForm() {
+  const [backgroundType, setBackgroundType] = useAtom(BackgroundTypeAtom);
   const [background, setBackground] = useAtom(BackgroundAtom);
-
-  const [type, setType] = useState<BackgroundType>("solid");
 
   /** 배경 타입 변경 */
   const handleBackgroundType = (value: BackgroundType) => {
-    setType(value);
+    setBackgroundType(value);
 
     if (value === "solid") {
       setBackground("#ffffff");
@@ -30,10 +27,10 @@ export default function BackgroundForm() {
   return (
     <Layout>
       <Title onClick={() => handleBackgroundType("solid")}>
-        <Radio value={"solid"} checked={type === "solid"} />
+        <Radio value={"solid"} checked={backgroundType === "solid"} />
         <Typography>단일 색상</Typography>
       </Title>
-      {type === "solid" && (
+      {backgroundType === "solid" && (
         <ColorPicker
           value={background}
           handleChange={(v) => setBackground(v)}
@@ -41,10 +38,10 @@ export default function BackgroundForm() {
       )}
 
       <Title onClick={() => handleBackgroundType("gradation")}>
-        <Radio value={"gradation"} checked={type === "gradation"} />
+        <Radio value={"gradation"} checked={backgroundType === "gradation"} />
         <Typography>그라데이션</Typography>
       </Title>
-      {type === "gradation" && (
+      {backgroundType === "gradation" && (
         <GradationItemWrap>
           <GradationItem value="linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)" />
           <GradationItem value="linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)" />
@@ -60,10 +57,10 @@ export default function BackgroundForm() {
       )}
 
       <Title onClick={() => handleBackgroundType("image")}>
-        <Radio value={"image"} checked={type === "image"} />
+        <Radio value={"image"} checked={backgroundType === "image"} />
         <Typography>이미지</Typography>
       </Title>
-      {type === "image" && <FileUploader />}
+      {backgroundType === "image" && <FileUploader />}
     </Layout>
   );
 }
