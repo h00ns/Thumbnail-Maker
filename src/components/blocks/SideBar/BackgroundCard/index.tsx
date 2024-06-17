@@ -11,7 +11,7 @@ import GradationItem from "./GradationItem";
 
 type BackgroundType = "solid" | "gradation" | "image";
 
-export default function Part2() {
+export default function BackgroundCard() {
   const [background, setBackground] = useAtom(BackgroundAtom);
   const [, setSelectIdx] = useAtom(SelectIdxAtom);
 
