@@ -1,6 +1,8 @@
 import { atom } from "jotai";
 import {
   BackgroundType,
+  Position,
+  PositionType,
   Resolution,
   ResolutionType,
   SelectIdxType,
@@ -17,3 +19,6 @@ export const BackgroundAtom = atom<string>("#ffffff");
 export const BackgroundTypeAtom = atom<BackgroundType>("solid");
 export const UseBorderAtom = atom<boolean>(false);
 export const BorderAtom = atom<string>("#e1c8c8");
+
+// 위치
+export const PositionAtom = atom<PositionType>(Position.TOP_LEFT);

@@ -3,6 +3,9 @@ import { Resolution } from "@/store/types";
 import { useAtom } from "jotai";
 import { RefObject, useEffect, useState } from "react";
 
+/**
+ *  @todo scale 로직으로 변경하기 (width, height는 유지하되 scale로 조절)
+ */
 export const useGetPreviewSize = (
   ref: RefObject<HTMLDivElement>
 ): { width: number; height: number } => {
