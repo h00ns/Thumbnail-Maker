@@ -2,9 +2,10 @@ import { gray, white } from "@/styles/Color";
 import { Radius } from "@/styles/Radius";
 import { Shadow } from "@/styles/Shadow";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import Typography from "../Typography";
+import { useOutsideClick } from "@/hooks/interaction/useOutsideClick";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
@@ -18,9 +19,13 @@ export default function ColorPicker({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const ref = useRef<HTMLDivElement>(null);
+
   const handleClick = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useOutsideClick(ref.current, () => setIsOpen(false));
 
   return (
     <Container {...divHtmlAttributes}>
@@ -29,11 +34,12 @@ export default function ColorPicker({
         <Typography>{value}</Typography>
       </Component>
 
-      {isOpen && (
-        <PaletteWrap>
-          <HexColorPicker color={value} onChange={handleChange} />
-        </PaletteWrap>
-      )}
+      <PaletteWrap
+        ref={ref}
+        style={{ visibility: isOpen ? "visible" : "hidden" }}
+      >
+        <HexColorPicker color={value} onChange={handleChange} />
+      </PaletteWrap>
     </Container>
   );
 }
