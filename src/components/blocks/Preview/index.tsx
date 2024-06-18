@@ -2,7 +2,12 @@ import { gray } from "@/styles/Color";
 import styled from "@emotion/styled";
 import { useRef } from "react";
 import { useGetPreviewSize } from "./Preview.hooks";
-import { BackgroundAtom, BorderAtom, UseBorderAtom } from "@/store";
+import {
+  BackgroundAtom,
+  BorderAtom,
+  PositionAtom,
+  UseBorderAtom,
+} from "@/store";
 import { useAtom } from "jotai";
 import { Shadow } from "@/styles/Shadow";
 import { mq } from "@/styles/Breakpoint";
@@ -13,8 +18,10 @@ export default function Preview() {
   const [background] = useAtom(BackgroundAtom);
   const [useBorder] = useAtom(UseBorderAtom);
   const [border] = useAtom(BorderAtom);
+  const [position] = useAtom(PositionAtom);
 
   const { width, height } = useGetPreviewSize(ref);
+  const [justifyContent, alignItems] = position.split(",");
 
   // base64 포함시 이미지로 판단
   const backgroundKey = background.includes("base64")
@@ -28,6 +35,8 @@ export default function Preview() {
         style={{
           width,
           height,
+          justifyContent,
+          alignItems,
           border: useBorder ? `15px solid ${border}` : undefined,
           [backgroundKey]: background,
         }}
@@ -55,8 +64,11 @@ const Wrap = styled.div`
 
 const PreviewContent = styled.div`
   width: 100%;
+  padding: 24px;
   box-shadow: ${Shadow.MEDIUM};
   background-size: cover;
   background-position: center center;
   box-sizing: border-box;
+
+  display: flex;
 `;

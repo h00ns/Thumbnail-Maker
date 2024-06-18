@@ -99,8 +99,6 @@ export default function BackgroundForm() {
 }
 
 const Layout = styled.div`
-  margin-top: 8px;
-
   display: flex;
   flex-direction: column;
   gap: 12px;

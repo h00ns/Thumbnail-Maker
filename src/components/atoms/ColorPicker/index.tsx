@@ -2,7 +2,7 @@ import { gray, white } from "@/styles/Color";
 import { Radius } from "@/styles/Radius";
 import { Shadow } from "@/styles/Shadow";
 import styled from "@emotion/styled";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import Typography from "../Typography";
 import { useOutsideClick } from "@/hooks/interaction/useOutsideClick";

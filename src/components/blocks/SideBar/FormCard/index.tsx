@@ -29,7 +29,7 @@ export default function FormCard({ idx, title, children }: Props) {
         <>
           <Divider />
 
-          <div>{children}</div>
+          <ChildrenWrap>{children}</ChildrenWrap>
         </>
       )}
     </Component>
@@ -76,4 +76,8 @@ const NumberBox = styled.div`
 
 const Title = styled(Typography)`
   flex: 1;
+`;
+
+const ChildrenWrap = styled.div`
+  margin-top: 8px;
 `;
