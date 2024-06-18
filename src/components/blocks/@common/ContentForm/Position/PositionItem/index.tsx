@@ -37,8 +37,8 @@ export default function PositionItem({ type, value }: Props) {
 }
 
 const Layout = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
 
   border-radius: ${Radius.MEDIUM};
   cursor: pointer;

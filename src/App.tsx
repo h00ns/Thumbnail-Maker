@@ -54,6 +54,6 @@ const FooterWrap = styled.div`
   display: none;
 
   ${mq["md"]} {
-    display: flex;
+    display: block;
   }
 `;
