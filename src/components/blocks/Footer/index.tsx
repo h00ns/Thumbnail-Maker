@@ -6,25 +6,36 @@ import ResolutionForm from "../@common/ResolutionForm";
 import Button from "@/components/atoms/Button";
 import BackgroundForm from "../@common/BackgroundForm";
 import ContentForm from "../@common/ContentForm";
+import ProgressBar from "@/components/atoms/ProgressBar";
 
 export default function Footer() {
   const [selectIdx, setSelectIdx] = useAtom(SelectIdxAtom);
 
-  return (
-    <Wrap>
-      {selectIdx === 1 && (
-        <FormSection idx={1} title="해상도">
-          <ContentWrap>
-            <ResolutionForm />
-            <Button text="다음으로" fullWidth onClick={() => setSelectIdx(2)} />
-          </ContentWrap>
-        </FormSection>
-      )}
+  const percent = {
+    1: 33.3,
+    2: 66.6,
+    3: 100,
+  }[selectIdx];
 
-      {selectIdx === 2 && (
-        <FormSection idx={2} title="배경">
-          <ContentWrap>
-            <BackgroundForm />
+  return (
+    <>
+      <ProgressBar value={percent} />
+      <Wrap>
+        {selectIdx === 1 && (
+          <FormSection idx={1} title="해상도">
+            <ContentWrap>
+              <ResolutionForm />
+            </ContentWrap>
+
+            <Button text="다음으로" fullWidth onClick={() => setSelectIdx(2)} />
+          </FormSection>
+        )}
+
+        {selectIdx === 2 && (
+          <FormSection idx={2} title="배경">
+            <ContentWrap>
+              <BackgroundForm />
+            </ContentWrap>
 
             <ButtonWrap>
               <Button
@@ -39,20 +50,20 @@ export default function Footer() {
                 onClick={() => setSelectIdx(3)}
               />
             </ButtonWrap>
-          </ContentWrap>
-        </FormSection>
-      )}
+          </FormSection>
+        )}
 
-      {selectIdx === 3 && (
-        <FormSection idx={3} title="내용">
-          <ContentWrap>
-            <ContentForm />
+        {selectIdx === 3 && (
+          <FormSection idx={3} title="내용">
+            <ContentWrap>
+              <ContentForm />
+            </ContentWrap>
 
             <Button text="이전으로" fullWidth onClick={() => setSelectIdx(2)} />
-          </ContentWrap>
-        </FormSection>
-      )}
-    </Wrap>
+          </FormSection>
+        )}
+      </Wrap>
+    </>
   );
 }
 
@@ -69,10 +80,7 @@ const Wrap = styled.div`
 
 const ContentWrap = styled.div`
   flex: 1;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  overflow-y: auto;
 `;
 
 const ButtonWrap = styled.div`

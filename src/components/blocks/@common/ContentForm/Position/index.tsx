@@ -34,8 +34,8 @@ const Layout = styled.div`
 `;
 
 const PositionBox = styled.div`
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   border: 1px solid ${gray.gray3};
   border-radius: ${Radius.SMALL};
   padding: 12px;
