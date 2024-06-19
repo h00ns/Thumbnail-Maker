@@ -68,18 +68,11 @@ export default function Footer() {
 }
 
 const Wrap = styled.div`
-  width: 100%;
-  height: 360px;
   padding: 12px 16px;
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 `;
 
 const ContentWrap = styled.div`
-  flex: 1;
+  height: 239px;
   overflow-y: auto;
 `;
 

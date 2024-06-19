@@ -10,7 +10,7 @@ import {
 } from "./types";
 
 // 선택중인 form idx
-export const SelectIdxAtom = atom<SelectIdxType>(1);
+export const SelectIdxAtom = atom<SelectIdxType>(3);
 
 // 해상도
 export const ResolutionAtom = atom<ResolutionType>(Resolution.RATIO_16_9);
@@ -27,13 +27,13 @@ export const PositionAtom = atom<PositionType>(Position.TOP_LEFT);
 // 제목
 export const TitleAtom = atom<TitleType>({
   value: "썸네일 만들기!",
-  size: 60,
+  size: 104,
   color: "#34963C",
 });
 
 // 부제목
 export const SubTitleAtom = atom<TitleType>({
   value: "편하고, 간편하게!",
-  size: 36,
+  size: 54,
   color: "#6ebbe6",
 });

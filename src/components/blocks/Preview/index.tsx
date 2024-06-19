@@ -86,7 +86,6 @@ const PreviewContent = styled.div`
   box-shadow: ${Shadow.MEDIUM};
   background-size: cover;
   background-position: center center;
-  box-sizing: border-box;
 
   display: flex;
 `;

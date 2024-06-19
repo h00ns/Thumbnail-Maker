@@ -1,7 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 
   background: #f6f6f6;
+}
+
+div {
+  box-sizing: border-box;
 }

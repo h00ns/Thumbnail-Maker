@@ -24,7 +24,6 @@ export default function Toggle({
 }
 
 const Component = styled.div<{ checkStatus: boolean }>`
-  box-sizing: border-box;
   width: 44px;
   height: 24px;
   padding: 2px;
