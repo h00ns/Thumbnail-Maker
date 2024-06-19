@@ -35,8 +35,8 @@ export default function Button({
   return (
     <Component
       fullWidth={fullWidth}
-      style={{ ...variants[variant] }}
       {...buttonHtmlAttributes}
+      style={{ ...variants[variant], ...buttonHtmlAttributes.style }}
     >
       {text}
     </Component>

@@ -6,6 +6,8 @@ import {
   BackgroundAtom,
   BorderAtom,
   PositionAtom,
+  SubTitleAtom,
+  TitleAtom,
   UseBorderAtom,
 } from "@/store";
 import { useAtom } from "jotai";
@@ -19,6 +21,8 @@ export default function Preview() {
   const [useBorder] = useAtom(UseBorderAtom);
   const [border] = useAtom(BorderAtom);
   const [position] = useAtom(PositionAtom);
+  const [title] = useAtom(TitleAtom);
+  const [subTitle] = useAtom(SubTitleAtom);
 
   const { width, height } = useGetPreviewSize(ref);
   const [justifyContent, alignItems] = position.split(",");
@@ -27,6 +31,12 @@ export default function Preview() {
   const backgroundKey = background.includes("base64")
     ? "backgroundImage"
     : "background";
+
+  const textAlign: Record<string, "left" | "center" | "right"> = {
+    "flex-start": "left",
+    center: "center",
+    "flex-end": "right",
+  };
 
   return (
     <Wrap ref={ref}>
@@ -37,11 +47,19 @@ export default function Preview() {
           height,
           justifyContent,
           alignItems,
+          textAlign: textAlign[justifyContent],
           border: useBorder ? `15px solid ${border}` : undefined,
           [backgroundKey]: background,
         }}
       >
-        Thumbnail~
+        <TextWrap>
+          <Text style={{ fontSize: title.size, color: title.color }}>
+            {title.value}
+          </Text>
+          <Text style={{ fontSize: subTitle.size, color: subTitle.color }}>
+            {subTitle.value}
+          </Text>
+        </TextWrap>
       </PreviewContent>
     </Wrap>
   );
@@ -71,4 +89,15 @@ const PreviewContent = styled.div`
   box-sizing: border-box;
 
   display: flex;
+`;
+
+const TextWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const Text = styled.p`
+  margin: 0;
+  font-weight: bold;
 `;

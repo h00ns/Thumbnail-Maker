@@ -28,3 +28,10 @@ export const Position = {
 } as const;
 
 export type PositionType = (typeof Position)[keyof typeof Position];
+
+// 제목, 부제목
+export type TitleType = {
+  value: string;
+  size: number;
+  color: string;
+};
