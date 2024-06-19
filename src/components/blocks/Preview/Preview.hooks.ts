@@ -8,7 +8,7 @@ import { RefObject, useEffect, useState } from "react";
  */
 export const useGetPreviewSize = (
   ref: RefObject<HTMLDivElement>
-): { width: number; height: number } => {
+): { width: number; height: number; scale: number } => {
   const [resolution] = useAtom(ResolutionAtom);
 
   const [width, setWidth] = useState(0);
@@ -75,5 +75,5 @@ export const useGetPreviewSize = (
     };
   }, [ref, resolution]);
 
-  return { width, height };
+  return { width, height, scale: 1 };
 };
