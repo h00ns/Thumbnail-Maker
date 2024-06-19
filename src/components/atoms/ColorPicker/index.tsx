@@ -28,16 +28,13 @@ export default function ColorPicker({
   useOutsideClick(ref.current, () => setIsOpen(false));
 
   return (
-    <Container {...divHtmlAttributes}>
-      <Component onClick={handleClick}>
+    <Container ref={ref} {...divHtmlAttributes}>
+      <Component onClickCapture={handleClick}>
         <Circle style={{ backgroundColor: value }} />
         <Typography>{value}</Typography>
       </Component>
 
-      <PaletteWrap
-        ref={ref}
-        style={{ visibility: isOpen ? "visible" : "hidden" }}
-      >
+      <PaletteWrap style={{ visibility: isOpen ? "visible" : "hidden" }}>
         <HexColorPicker color={value} onChange={handleChange} />
       </PaletteWrap>
     </Container>
@@ -45,6 +42,8 @@ export default function ColorPicker({
 }
 
 const Container = styled.div`
+  width: fit-content;
+
   position: relative;
 `;
 
@@ -70,6 +69,7 @@ const Circle = styled.div`
   border-radius: ${Radius.MAXIMUM};
 `;
 
+/** @todo 모바일 footer 이슈있음 fixed로 해결 */
 const PaletteWrap = styled.div`
   padding: 12px 16px;
   background: ${white};

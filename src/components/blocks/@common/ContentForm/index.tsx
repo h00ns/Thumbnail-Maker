@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import Position from "./Position";
 import Divider from "@/components/atoms/Divider";
+import Title from "./Title";
+import SubTitle from "./SubTitle";
 
 export default function ContentForm() {
   return (
@@ -9,6 +11,14 @@ export default function ContentForm() {
       <Position />
 
       <Divider />
+
+      {/* 제목 */}
+      <Title />
+
+      <Divider />
+
+      {/* 부제목 */}
+      <SubTitle />
     </Layout>
   );
 }

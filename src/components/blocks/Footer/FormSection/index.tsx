@@ -27,7 +27,7 @@ export default function FormSection({ idx, title, children }: Props) {
 }
 
 const Component = styled.div`
-  height: 100%;
+  flex: 1;
 
   display: flex;
   flex-direction: column;
