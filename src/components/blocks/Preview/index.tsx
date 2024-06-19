@@ -24,7 +24,7 @@ export default function Preview() {
   const [title] = useAtom(TitleAtom);
   const [subTitle] = useAtom(SubTitleAtom);
 
-  const { width, height } = useGetPreviewSize(ref);
+  const { width, height, scale } = useGetPreviewSize(ref);
   const [justifyContent, alignItems] = position.split(",");
 
   // base64 포함시 이미지로 판단
@@ -47,6 +47,7 @@ export default function Preview() {
           height,
           justifyContent,
           alignItems,
+          scale: scale.toString(),
           textAlign: textAlign[justifyContent],
           border: useBorder ? `15px solid ${border}` : undefined,
           [backgroundKey]: background,

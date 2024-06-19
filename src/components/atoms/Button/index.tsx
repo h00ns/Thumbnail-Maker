@@ -44,7 +44,7 @@ export default function Button({
 }
 
 const Component = styled.button<{ fullWidth: boolean }>`
-  padding: 10px 12px;
+  padding: 7px 12px;
   border: none;
   border-radius: ${Radius.MEDIUM};
   font-size: 14px;
