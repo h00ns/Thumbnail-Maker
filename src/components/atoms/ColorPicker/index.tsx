@@ -6,6 +6,8 @@ import { useRef, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import Typography from "../Typography";
 import { useOutsideClick } from "@/hooks/interaction/useOutsideClick";
+import { mq } from "@/styles/Breakpoint";
+import Button from "../Button";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
@@ -34,9 +36,19 @@ export default function ColorPicker({
         <Typography>{value}</Typography>
       </Component>
 
-      <PaletteWrap style={{ visibility: isOpen ? "visible" : "hidden" }}>
-        <HexColorPicker color={value} onChange={handleChange} />
-      </PaletteWrap>
+      {isOpen && (
+        <>
+          <PcPaletteWrap>
+            <HexColorPicker color={value} onChange={handleChange} />
+          </PcPaletteWrap>
+
+          <MobilePaletteWrap>
+            <HexColorPicker color={value} onChange={handleChange} />
+
+            <Button style={{ width: 200 }} text="선택" onClick={handleClick} />
+          </MobilePaletteWrap>
+        </>
+      )}
     </Container>
   );
 }
@@ -69,8 +81,7 @@ const Circle = styled.div`
   border-radius: ${Radius.MAXIMUM};
 `;
 
-/** @todo 모바일 footer 이슈있음 fixed로 해결 */
-const PaletteWrap = styled.div`
+const PcPaletteWrap = styled.div`
   padding: 12px 16px;
   background: ${white};
   border-radius: ${Radius.MEDIUM};
@@ -79,5 +90,29 @@ const PaletteWrap = styled.div`
 
   position: absolute;
   top: 40px;
-  left: 0px;
+  left: 0;
+
+  ${mq["md"]} {
+    display: none;
+  }
+`;
+
+const MobilePaletteWrap = styled.div`
+  display: none;
+
+  width: 100%;
+  padding: 12px 16px;
+  background: ${white};
+  box-shadow: ${Shadow.MEDIUM};
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  ${mq["md"]} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
 `;

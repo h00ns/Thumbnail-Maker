@@ -46,7 +46,6 @@ const Wrap = styled.div`
   width: 320px;
   height: 100%;
   padding: 12px 16px;
-  box-sizing: border-box;
   box-shadow: ${Shadow.SMALL};
   overflow-y: auto;
 
