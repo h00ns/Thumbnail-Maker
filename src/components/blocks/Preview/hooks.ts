@@ -1,19 +1,19 @@
-import { Resolution } from "./../../../store/types";
-import { ResolutionAtom } from "@/store";
-import { useAtom } from "jotai";
+import { Ratio, ThumbnailFormType } from "@/forms/types";
 import { RefObject, useEffect, useState } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 
 export const useGetSize = (ref: RefObject<HTMLDivElement>) => {
-  const [resolution] = useAtom(ResolutionAtom);
+  const { control } = useFormContext<ThumbnailFormType>();
+  const ratio = useWatch({ control, name: "ratio" });
 
   const [scale, setScale] = useState(1);
 
   const [originWidth, originHeight, aspectRatio] = {
-    [Resolution.RATIO_16_9]: [1280, 720, "16 / 9"],
-    [Resolution.RATIO_9_16]: [720, 1280, "9 / 16"],
-    [Resolution.RATIO_4_3]: [800, 600, "4 / 3"],
-    [Resolution.RATIO_1_1]: [720, 720, "1 / 1"],
-  }[resolution] as [number, number, string];
+    [Ratio.RATIO_16_9]: [1280, 720, "16 / 9"],
+    [Ratio.RATIO_9_16]: [720, 1280, "9 / 16"],
+    [Ratio.RATIO_4_3]: [800, 600, "4 / 3"],
+    [Ratio.RATIO_1_1]: [720, 720, "1 / 1"],
+  }[ratio] as [number, number, string];
 
   useEffect(() => {
     if (!ref.current) return;

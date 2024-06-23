@@ -1,29 +1,35 @@
 import ColorPicker from "@/components/atoms/ColorPicker";
 import Radio from "@/components/atoms/Radio";
 import Typography from "@/components/atoms/Typography";
-import { BackgroundAtom, BackgroundTypeAtom } from "@/store";
-import { BackgroundType } from "@/store/types";
+import { ThumbnailFormType } from "@/forms/types";
+import { SelectBackgroundType, SelectBackgroundTypeAtom } from "@/store";
 import styled from "@emotion/styled";
 import { useAtom } from "jotai";
+import { Controller, useFormContext } from "react-hook-form";
 
 type Props = {
-  handleBackgroundType: (value: BackgroundType) => void;
+  handleBackgroundType: (value: SelectBackgroundType) => void;
 };
 
 export default function Solid({ handleBackgroundType }: Props) {
-  const [backgroundType] = useAtom(BackgroundTypeAtom);
-  const [background, setBackground] = useAtom(BackgroundAtom);
+  const { control } = useFormContext<ThumbnailFormType>();
+  const [SelectBackgroundType] = useAtom(SelectBackgroundTypeAtom);
+
+  const isChecked = SelectBackgroundType === "solid";
 
   return (
     <>
       <Title onClick={() => handleBackgroundType("solid")}>
-        <Radio value={"solid"} checked={backgroundType === "solid"} />
+        <Radio value={"solid"} checked={isChecked} />
         <Typography>단일 색상</Typography>
       </Title>
-      {backgroundType === "solid" && (
-        <ColorPicker
-          value={background}
-          handleChange={(value) => setBackground(value)}
+      {isChecked && (
+        <Controller
+          name="background.value"
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <ColorPicker value={value} handleChange={onChange} />
+          )}
         />
       )}
     </>

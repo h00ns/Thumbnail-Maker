@@ -1,22 +1,22 @@
-import { ResolutionAtom } from "@/store";
-import { ResolutionType } from "@/store/types";
+import { RatioType, ThumbnailFormType } from "@/forms/types";
 import { gray } from "@/styles/Color";
 import { Radius } from "@/styles/Radius";
 import styled from "@emotion/styled";
-import { useAtom } from "jotai";
+import { useFormContext, useWatch } from "react-hook-form";
 
 type Props = {
   text: string;
-  value: ResolutionType;
+  value: RatioType;
 };
 
-export default function ResolutionButton({ text, value }: Props) {
-  const [resolution, setResolution] = useAtom(ResolutionAtom);
+export default function RatioButton({ text, value }: Props) {
+  const { control, setValue } = useFormContext<ThumbnailFormType>();
+  const ratio = useWatch({ control, name: "ratio" });
 
-  const isSelect = resolution === value;
+  const isSelect = ratio === value;
 
   const handleClick = () => {
-    setResolution(value);
+    setValue("ratio", value);
   };
 
   return (

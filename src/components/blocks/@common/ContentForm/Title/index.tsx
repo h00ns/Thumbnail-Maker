@@ -1,57 +1,31 @@
 import ColorPicker from "@/components/atoms/ColorPicker";
 import Textfield from "@/components/atoms/Textfield";
 import Typography from "@/components/atoms/Typography";
-import { TitleAtom } from "@/store";
+import { ThumbnailFormType } from "@/forms/types";
 import styled from "@emotion/styled";
-import { useAtom } from "jotai";
-import { ChangeEvent } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 
 export default function Title() {
-  const [title, setTitle] = useAtom(TitleAtom);
-  const { value, size, color } = title;
-
-  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    setTitle((prev) => ({
-      ...prev,
-      value,
-    }));
-  };
-
-  const handleFontSizeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    setTitle((prev) => ({
-      ...prev,
-      size: parseInt(value),
-    }));
-  };
-
-  const handleColorChange = (value: string) => {
-    setTitle((prev) => ({
-      ...prev,
-      color: value,
-    }));
-  };
+  const { register, control } = useFormContext<ThumbnailFormType>();
 
   return (
     <>
       <Typography variant="sh4">제목</Typography>
       <Block>
-        <Textfield
-          style={{ flex: 1 }}
-          value={value}
-          onChange={handleTitleChange}
-        />
+        <Textfield style={{ flex: 1 }} {...register("content.title.value")} />
         <Textfield
           style={{ width: 32 }}
           type="number"
-          value={size}
-          onChange={handleFontSizeChange}
+          {...register("content.title.size")}
         />
       </Block>
-      <ColorPicker value={color} handleChange={handleColorChange} />
+      <Controller
+        control={control}
+        name="content.title.color"
+        render={({ field: { value, onChange } }) => (
+          <ColorPicker value={value} handleChange={onChange} />
+        )}
+      />
     </>
   );
 }

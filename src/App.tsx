@@ -4,13 +4,26 @@ import Preview from "./components/blocks/Preview";
 import SideBar from "./components/blocks/SideBar";
 import { mq } from "./styles/Breakpoint";
 import Footer from "./components/blocks/Footer";
+import {
+  FormProvider as ThumbnailFormProvider,
+  useForm,
+} from "react-hook-form";
+import { ThumbnailFormType } from "./forms/types";
+import { thumbnailFormDefaultValues } from "./forms/states";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ThumbnailFormSchema } from "./forms/schema";
 
 function App() {
+  const method = useForm<ThumbnailFormType>({
+    defaultValues: thumbnailFormDefaultValues,
+    resolver: zodResolver(ThumbnailFormSchema),
+  });
+
   return (
-    <>
+    <ThumbnailFormProvider {...method}>
       <Header />
       <Content />
-    </>
+    </ThumbnailFormProvider>
   );
 }
 

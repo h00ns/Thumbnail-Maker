@@ -1,31 +1,36 @@
-import { BackgroundAtom, BackgroundTypeAtom } from "@/store";
 import styled from "@emotion/styled";
 import { useAtom } from "jotai";
-import { BackgroundType } from "@/store/types";
 import Divider from "@/components/atoms/Divider";
 import Border from "./Border";
 import Image from "./Image";
 import Solid from "./Solid";
 import Gradation from "./Gradation";
+import { SelectBackgroundType, SelectBackgroundTypeAtom } from "@/store";
+import { useFormContext } from "react-hook-form";
+import { ThumbnailFormType } from "@/forms/types";
 
 export const INITIAL_BACKGROUND = "#ffffff";
 
 export default function BackgroundForm() {
-  const [, setBackgroundType] = useAtom(BackgroundTypeAtom);
-  const [, setBackground] = useAtom(BackgroundAtom);
+  const { setValue } = useFormContext<ThumbnailFormType>();
+
+  const [, setSelectBackgroundType] = useAtom(SelectBackgroundTypeAtom);
 
   /** 배경 타입 변경 */
-  const handleBackgroundType = (value: BackgroundType) => {
-    setBackgroundType(value);
+  const handleBackgroundType = (value: SelectBackgroundType) => {
+    setSelectBackgroundType(value);
 
     if (value === "solid") {
-      setBackground(INITIAL_BACKGROUND);
+      setValue("background.value", INITIAL_BACKGROUND);
     }
     if (value === "gradation") {
-      setBackground("linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)");
+      setValue(
+        "background.value",
+        "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)"
+      );
     }
     if (value === "image") {
-      setBackground(INITIAL_BACKGROUND);
+      setValue("background.value", INITIAL_BACKGROUND);
     }
   };
 

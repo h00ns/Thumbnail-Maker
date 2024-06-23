@@ -2,13 +2,16 @@ import { gray } from "@/styles/Color";
 import { Radius } from "@/styles/Radius";
 import styled from "@emotion/styled";
 import Typography from "../Typography";
-import { ChangeEvent, useRef } from "react";
-import { useAtom } from "jotai";
-import { BackgroundAtom } from "@/store";
+import React, { ChangeEvent, useRef } from "react";
 
-export default function FileUploader() {
-  const [, setBackground] = useAtom(BackgroundAtom);
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  handleFile: (value: string) => void;
+}
 
+export default function FileUploader({
+  handleFile,
+  ...divHtmlAttributes
+}: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleClick = () => {
@@ -26,14 +29,14 @@ export default function FileUploader() {
 
       reader.onload = (e) => {
         const result = e.target?.result;
-        setBackground(`url(${result})`);
+        handleFile(`url(${result})`);
       };
 
       reader.readAsDataURL(file);
     }
   };
   return (
-    <Component onClick={handleClick}>
+    <Component onClick={handleClick} {...divHtmlAttributes}>
       <Typography color={gray.gray6}>이미지를 업로드해주세요</Typography>
 
       <input

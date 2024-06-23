@@ -1,8 +1,5 @@
-import FileUploader from "@/components/atoms/FileUploader";
 import Radio from "@/components/atoms/Radio";
 import Typography from "@/components/atoms/Typography";
-import { BackgroundAtom, BackgroundTypeAtom } from "@/store";
-import { BackgroundType } from "@/store/types";
 import { gray } from "@/styles/Color";
 import { Radius } from "@/styles/Radius";
 import { Shadow } from "@/styles/Shadow";
@@ -10,29 +7,43 @@ import styled from "@emotion/styled";
 import { useAtom } from "jotai";
 import { INITIAL_BACKGROUND } from "..";
 import { Title } from "../Solid";
+import { SelectBackgroundType, SelectBackgroundTypeAtom } from "@/store";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
+import { ThumbnailFormType } from "@/forms/types";
+import FileUploader from "@/components/atoms/FileUploader";
 
 type Props = {
-  handleBackgroundType: (value: BackgroundType) => void;
+  handleBackgroundType: (value: SelectBackgroundType) => void;
 };
 
 export default function Image({ handleBackgroundType }: Props) {
-  const [backgroundType] = useAtom(BackgroundTypeAtom);
-  const [background, setBackground] = useAtom(BackgroundAtom);
+  const { control, setValue } = useFormContext<ThumbnailFormType>();
+  const background = useWatch({ control, name: "background.value" });
+
+  const [selectBackgroundType] = useAtom(SelectBackgroundTypeAtom);
+
+  const isChecked = selectBackgroundType === "image";
 
   const handleImageDelete = () => {
-    setBackground(INITIAL_BACKGROUND);
+    setValue("background.value", INITIAL_BACKGROUND);
   };
 
   return (
     <>
       <Title onClick={() => handleBackgroundType("image")}>
-        <Radio value={"image"} checked={backgroundType === "image"} />
+        <Radio value={"image"} checked={isChecked} />
         <Typography>이미지</Typography>
       </Title>
-      {backgroundType === "image" && (
+      {isChecked && (
         <>
           {background === INITIAL_BACKGROUND ? (
-            <FileUploader />
+            <Controller
+              name="background.value"
+              control={control}
+              render={({ field: { onChange } }) => (
+                <FileUploader handleFile={onChange} />
+              )}
+            />
           ) : (
             <ImgWrap>
               <Img style={{ backgroundImage: background }} />

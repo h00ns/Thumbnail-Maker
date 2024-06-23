@@ -3,7 +3,7 @@ import { gray } from "@/styles/Color";
 import { Radius } from "@/styles/Radius";
 import styled from "@emotion/styled";
 import PositionItem from "./PositionItem";
-import { Position } from "@/store/types";
+import { Position } from "@/forms/types";
 
 export default function PositionComponent() {
   return (

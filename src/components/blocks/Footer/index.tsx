@@ -2,11 +2,11 @@ import { SelectIdxAtom } from "@/store";
 import styled from "@emotion/styled";
 import { useAtom } from "jotai";
 import FormSection from "./FormSection";
-import ResolutionForm from "../@common/ResolutionForm";
 import Button from "@/components/atoms/Button";
 import BackgroundForm from "../@common/BackgroundForm";
 import ContentForm from "../@common/ContentForm";
 import ProgressBar from "@/components/atoms/ProgressBar";
+import RatioForm from "../@common/RatioForm";
 
 export default function Footer() {
   const [selectIdx, setSelectIdx] = useAtom(SelectIdxAtom);
@@ -24,7 +24,7 @@ export default function Footer() {
         {selectIdx === 1 && (
           <FormSection idx={1} title="해상도">
             <ContentWrap>
-              <ResolutionForm />
+              <RatioForm />
             </ContentWrap>
 
             <Button text="다음으로" fullWidth onClick={() => setSelectIdx(2)} />

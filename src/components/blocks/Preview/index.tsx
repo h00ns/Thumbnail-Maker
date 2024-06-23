@@ -1,34 +1,30 @@
 import { gray } from "@/styles/Color";
 import styled from "@emotion/styled";
 import { useRef } from "react";
-import {
-  BackgroundAtom,
-  BorderAtom,
-  PositionAtom,
-  SubTitleAtom,
-  TitleAtom,
-  UseBorderAtom,
-} from "@/store";
-import { useAtom } from "jotai";
 import { Shadow } from "@/styles/Shadow";
 import { mq } from "@/styles/Breakpoint";
 import { useGetSize } from "./hooks";
+import { useFormContext, useWatch } from "react-hook-form";
+import { ThumbnailFormType } from "@/forms/types";
 
 export default function Preview() {
   const ref = useRef<HTMLDivElement>(null);
 
-  const [background] = useAtom(BackgroundAtom);
-  const [useBorder] = useAtom(UseBorderAtom);
-  const [border] = useAtom(BorderAtom);
-  const [position] = useAtom(PositionAtom);
-  const [title] = useAtom(TitleAtom);
-  const [subTitle] = useAtom(SubTitleAtom);
+  const { control } = useFormContext<ThumbnailFormType>();
+
+  const [background, content] = useWatch({
+    control,
+    name: ["background", "content"],
+  });
+
+  const { value: backgroundValue, border } = background;
+  const { position, title, subTitle } = content;
 
   const { width, height, scale, aspectRatio } = useGetSize(ref);
   const [justifyContent, alignItems] = position.split(",");
 
   // base64 포함시 이미지로 판단
-  const backgroundKey = background.includes("base64")
+  const backgroundKey = backgroundValue.includes("base64")
     ? "backgroundImage"
     : "background";
 
@@ -55,7 +51,7 @@ export default function Preview() {
               justifyContent,
               alignItems,
               textAlign: textAlign[justifyContent],
-              border: useBorder ? `15px solid ${border}` : undefined,
+              border: border ? `15px solid ${border}` : undefined,
               [backgroundKey]: background,
             }}
           >
