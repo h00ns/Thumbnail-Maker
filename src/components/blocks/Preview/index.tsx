@@ -1,7 +1,6 @@
 import { gray } from "@/styles/Color";
 import styled from "@emotion/styled";
 import { useRef } from "react";
-import { useGetPreviewSize } from "./Preview.hooks";
 import {
   BackgroundAtom,
   BorderAtom,
@@ -13,6 +12,7 @@ import {
 import { useAtom } from "jotai";
 import { Shadow } from "@/styles/Shadow";
 import { mq } from "@/styles/Breakpoint";
+import { useGetSize } from "./hooks";
 
 export default function Preview() {
   const ref = useRef<HTMLDivElement>(null);
@@ -24,7 +24,7 @@ export default function Preview() {
   const [title] = useAtom(TitleAtom);
   const [subTitle] = useAtom(SubTitleAtom);
 
-  const { width, height, scale } = useGetPreviewSize(ref);
+  const { width, height, scale, aspectRatio } = useGetSize(ref);
   const [justifyContent, alignItems] = position.split(",");
 
   // base64 포함시 이미지로 판단
@@ -40,33 +40,40 @@ export default function Preview() {
 
   return (
     <Wrap ref={ref}>
-      <PreviewContent
-        id="thumbnail"
-        style={{
-          width,
-          height,
-          justifyContent,
-          alignItems,
-          scale: scale.toString(),
-          textAlign: textAlign[justifyContent],
-          border: useBorder ? `15px solid ${border}` : undefined,
-          [backgroundKey]: background,
-        }}
-      >
-        <TextWrap>
-          <Text style={{ fontSize: title.size, color: title.color }}>
-            {title.value}
-          </Text>
-          <Text style={{ fontSize: subTitle.size, color: subTitle.color }}>
-            {subTitle.value}
-          </Text>
-        </TextWrap>
-      </PreviewContent>
+      <div id="thumbnail">
+        <ThumbnailPreview
+          style={{
+            width,
+            height,
+            aspectRatio,
+            transform: `scale(${scale})`,
+          }}
+        >
+          <PreviewContent
+            style={{
+              justifyContent,
+              alignItems,
+              textAlign: textAlign[justifyContent],
+              border: useBorder ? `15px solid ${border}` : undefined,
+              [backgroundKey]: background,
+            }}
+          >
+            <TextWrap>
+              <Text style={{ fontSize: title.size, color: title.color }}>
+                {title.value}
+              </Text>
+              <Text style={{ fontSize: subTitle.size, color: subTitle.color }}>
+                {subTitle.value}
+              </Text>
+            </TextWrap>
+          </PreviewContent>
+        </ThumbnailPreview>
+      </div>
     </Wrap>
   );
 }
 
-const Wrap = styled.div`
+const Wrap = styled.main`
   flex: 1;
   padding: 56px;
   background: ${gray.gray2};
@@ -81,14 +88,18 @@ const Wrap = styled.div`
   }
 `;
 
-const PreviewContent = styled.div`
-  width: 100%;
-  padding: 24px;
+const ThumbnailPreview = styled.div`
   box-shadow: ${Shadow.MEDIUM};
   background-size: cover;
   background-position: center center;
 
   display: flex;
+`;
+
+const PreviewContent = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 24px;
 `;
 
 const TextWrap = styled.div`
