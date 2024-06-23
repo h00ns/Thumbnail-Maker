@@ -2,12 +2,12 @@ import { Shadow } from "@/styles/Shadow";
 import styled from "@emotion/styled";
 import { useAtom } from "jotai";
 import { SelectIdxAtom } from "@/store";
-import ResolutionForm from "../@common/ResolutionForm";
 import Button from "@/components/atoms/Button";
 import BackgroundForm from "../@common/BackgroundForm";
 import FormCard from "./FormCard";
 import ContentForm from "../@common/ContentForm";
 import { gray } from "@/styles/Color";
+import RatioForm from "../@common/RatioForm";
 
 export default function SideBar() {
   const [, setSelectIdx] = useAtom(SelectIdxAtom);
@@ -15,7 +15,7 @@ export default function SideBar() {
   return (
     <Wrap>
       <FormCard idx={1} title="해상도">
-        <ResolutionForm />
+        <RatioForm />
 
         <Button
           style={{ marginTop: 16 }}

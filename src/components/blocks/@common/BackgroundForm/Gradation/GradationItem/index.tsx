@@ -1,19 +1,23 @@
 import styled from "@emotion/styled";
-import { BackgroundAtom } from "@/store";
-import { useAtom } from "jotai";
 import { Radius } from "@/styles/Radius";
+import { ThumbnailFormType } from "@/forms/types";
+import { useFormContext } from "react-hook-form";
 
 type Props = {
   value: string;
 };
 
 export default function GradationItem({ value }: Props) {
-  const [, setBackground] = useAtom(BackgroundAtom);
+  const { setValue } = useFormContext<ThumbnailFormType>();
+
+  const handleClick = (value: string) => {
+    setValue("background.value", value);
+  };
 
   return (
     <Component
       style={{ background: value }}
-      onClick={() => setBackground(value)}
+      onClick={() => handleClick(value)}
     />
   );
 }

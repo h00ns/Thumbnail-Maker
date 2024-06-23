@@ -2,25 +2,26 @@ import styled from "@emotion/styled";
 import GradationItem from "./GradationItem";
 import Radio from "@/components/atoms/Radio";
 import Typography from "@/components/atoms/Typography";
-import { BackgroundType } from "@/store/types";
 import { useAtom } from "jotai";
-import { BackgroundTypeAtom } from "@/store";
 import { Title } from "../Solid";
+import { SelectBackgroundType, SelectBackgroundTypeAtom } from "@/store";
 
 type Props = {
-  handleBackgroundType: (value: BackgroundType) => void;
+  handleBackgroundType: (value: SelectBackgroundType) => void;
 };
 
 export default function Gradation({ handleBackgroundType }: Props) {
-  const [backgroundType] = useAtom(BackgroundTypeAtom);
+  const [selectBackground] = useAtom(SelectBackgroundTypeAtom);
+
+  const isChecked = selectBackground === "gradation";
 
   return (
     <>
       <Title onClick={() => handleBackgroundType("gradation")}>
-        <Radio value={"gradation"} checked={backgroundType === "gradation"} />
+        <Radio value={"gradation"} checked={isChecked} />
         <Typography>그라데이션</Typography>
       </Title>
-      {backgroundType === "gradation" && (
+      {isChecked && (
         <GradationItemWrap>
           <GradationItem value="linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)" />
           <GradationItem value="linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)" />

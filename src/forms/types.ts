@@ -1,18 +1,19 @@
-// 선택중인 form idx
-export type SelectIdxType = 1 | 2 | 3;
+import { z } from "zod";
+import {
+  BackgroundSchema,
+  ContentSchema,
+  PositionSchema,
+  RatioSchema,
+  ThumbnailFormSchema,
+} from "./schema";
 
 // 해상도
-export const Resolution = {
+export const Ratio = {
   RATIO_16_9: "16 / 9",
   RATIO_9_16: "9 / 16",
   RATIO_4_3: "4 / 3",
   RATIO_1_1: "1 / 1",
 } as const;
-
-export type ResolutionType = (typeof Resolution)[keyof typeof Resolution];
-
-// 배경
-export type BackgroundType = "solid" | "gradation" | "image";
 
 // 위치
 export const Position = {
@@ -27,11 +28,9 @@ export const Position = {
   BOTTOM_RIGHT: "flex-end, flex-end",
 } as const;
 
-export type PositionType = (typeof Position)[keyof typeof Position];
+export type RatioType = z.infer<typeof RatioSchema>;
+export type PositionType = z.infer<typeof PositionSchema>;
+export type BackgroundType = z.infer<typeof BackgroundSchema>;
+export type ContentSchemaType = z.infer<typeof ContentSchema>;
 
-// 제목, 부제목
-export type TitleType = {
-  value: string;
-  size: number;
-  color: string;
-};
+export type ThumbnailFormType = z.infer<typeof ThumbnailFormSchema>;

@@ -12,12 +12,15 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@hookform/resolvers": "^3.6.0",
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.5",
     "jotai": "^2.8.3",
     "react": "^18.2.0",
     "react-colorful": "^5.6.1",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.52.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/dom-to-image": "^2.6.7",

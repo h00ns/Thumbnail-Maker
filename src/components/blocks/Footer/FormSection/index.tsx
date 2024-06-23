@@ -1,6 +1,6 @@
 import Divider from "@/components/atoms/Divider";
 import Typography from "@/components/atoms/Typography";
-import { SelectIdxType } from "@/store/types";
+import { SelectIdxType } from "@/store";
 import { blue, white } from "@/styles/Color";
 import { Radius } from "@/styles/Radius";
 import styled from "@emotion/styled";

@@ -1,9 +1,8 @@
-import { PositionAtom } from "@/store";
-import { PositionType } from "@/store/types";
+import { PositionType, ThumbnailFormType } from "@/forms/types";
 import { gray, primary } from "@/styles/Color";
 import { Radius } from "@/styles/Radius";
 import styled from "@emotion/styled";
-import { useAtom } from "jotai";
+import { useFormContext, useWatch } from "react-hook-form";
 
 type Props = {
   type: "left" | "center" | "right";
@@ -11,7 +10,8 @@ type Props = {
 };
 
 export default function PositionItem({ type, value }: Props) {
-  const [position, setPosition] = useAtom(PositionAtom);
+  const { control, setValue } = useFormContext<ThumbnailFormType>();
+  const position = useWatch({ control, name: "content.position" });
 
   const alignItems = {
     left: "flex-start",
@@ -19,10 +19,14 @@ export default function PositionItem({ type, value }: Props) {
     right: "flex-end",
   }[type];
 
+  const handleClick = (value: PositionType) => {
+    setValue("content.position", value);
+  };
+
   const isSelect = position === value;
 
   return (
-    <Layout onClick={() => setPosition(value)}>
+    <Layout onClick={() => handleClick(value)}>
       {isSelect ? (
         <StickWrap style={{ alignItems }}>
           <SmallStick />
