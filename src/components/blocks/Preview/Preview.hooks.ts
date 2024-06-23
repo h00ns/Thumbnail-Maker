@@ -1,15 +1,19 @@
-import { ResolutionAtom } from "@/store";
-import { Resolution } from "@/store/types";
-import { useAtom } from "jotai";
+import { Ratio, ThumbnailFormType } from "@/forms/types";
 import { RefObject, useEffect, useState } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 
-export const useGetPreviewSize = (
-  ref: RefObject<HTMLDivElement>
-): { width: number; height: number; scale: number } => {
-  const [resolution] = useAtom(ResolutionAtom);
+export const useGetSize = (ref: RefObject<HTMLDivElement>) => {
+  const { control } = useFormContext<ThumbnailFormType>();
+  const ratio = useWatch({ control, name: "ratio" });
 
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [scale, setScale] = useState(1);
+
+  const [originWidth, originHeight, aspectRatio] = {
+    [Ratio.RATIO_16_9]: [1280, 720, "16 / 9"],
+    [Ratio.RATIO_9_16]: [720, 1280, "9 / 16"],
+    [Ratio.RATIO_4_3]: [800, 600, "4 / 3"],
+    [Ratio.RATIO_1_1]: [720, 720, "1 / 1"],
+  }[ratio] as [number, number, string];
 
   useEffect(() => {
     if (!ref.current) return;
@@ -17,7 +21,6 @@ export const useGetPreviewSize = (
     addEventListener("resize", handleResize);
     handleResize();
 
-    /** 리사이즈 이벤트 */
     function handleResize() {
       if (!ref.current) return;
 
@@ -28,49 +31,21 @@ export const useGetPreviewSize = (
       const MOBILE_PADDING = 24;
       const PADDING = refWidth > 480 ? PC_PADDING : MOBILE_PADDING;
 
-      const width = refWidth - PADDING;
-      const height = refHeight - PADDING;
+      const availableWidth = refWidth - PADDING * 2;
+      const availableHeight = refHeight - PADDING * 2;
 
-      /** 1 : 1 */
-      if (resolution === Resolution.RATIO_1_1) {
-        const value = Math.min(width, height);
+      const newScale = Math.min(
+        availableWidth / originWidth,
+        availableHeight / originHeight
+      );
 
-        setWidth(value);
-        setHeight(value);
-        return;
-      }
-
-      /** 그 외의 비율 */
-      switch (resolution) {
-        case Resolution.RATIO_16_9:
-          _calculteResolution(16, 9);
-          break;
-        case Resolution.RATIO_9_16:
-          _calculteResolution(9, 16);
-          break;
-        case Resolution.RATIO_4_3:
-          _calculteResolution(4, 3);
-          break;
-      }
-
-      function _calculteResolution(widthRatio: number, heightRatio: number) {
-        const parsedHeight = (width / widthRatio) * heightRatio;
-
-        if (parsedHeight > height) {
-          setWidth((height / heightRatio) * widthRatio);
-          setHeight(height);
-          return;
-        }
-
-        setWidth(width);
-        setHeight(parsedHeight);
-      }
+      setScale(newScale);
     }
 
     return () => {
       removeEventListener("resize", handleResize);
     };
-  }, [ref, resolution]);
+  }, [ref, originWidth, originHeight]);
 
-  return { width, height, scale: 1 };
+  return { width: originWidth, height: originHeight, scale, aspectRatio };
 };

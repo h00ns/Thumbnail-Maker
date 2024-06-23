@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useRef } from "react";
 import { Shadow } from "@/styles/Shadow";
 import { mq } from "@/styles/Breakpoint";
-import { useGetSize } from "./hooks";
+import { useGetSize } from "./Preview.hooks";
 import { useFormContext, useWatch } from "react-hook-form";
 import { ThumbnailFormType } from "@/forms/types";
 
@@ -52,7 +52,7 @@ export default function Preview() {
               alignItems,
               textAlign: textAlign[justifyContent],
               border: border ? `15px solid ${border}` : undefined,
-              [backgroundKey]: background,
+              [backgroundKey]: backgroundValue,
             }}
           >
             <TextWrap>
@@ -87,8 +87,6 @@ const Wrap = styled.main`
 
 const ThumbnailPreview = styled.div`
   box-shadow: ${Shadow.MEDIUM};
-  background-size: cover;
-  background-position: center center;
 
   display: flex;
 `;
@@ -97,6 +95,10 @@ const PreviewContent = styled.div`
   width: 100%;
   height: 100%;
   padding: 24px;
+  background-size: cover;
+  background-position: center center;
+
+  display: flex;
 `;
 
 const TextWrap = styled.div`

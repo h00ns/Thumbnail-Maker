@@ -17,15 +17,15 @@ export const Ratio = {
 
 // 위치
 export const Position = {
-  TOP_LEFT: "flex-start, flex-start",
-  TOP_CENTER: "center, flex-start",
-  TOP_RIGHT: "flex-end, flex-start",
-  CENTER_LEFT: "flex-start, center",
-  CENTER_CENTER: "center, center",
-  CENTER_RIGHT: "flex-end, center",
-  BOTTOM_LEFT: "flex-start, flex-end",
-  BOTTOM_CENTER: "center, flex-end",
-  BOTTOM_RIGHT: "flex-end, flex-end",
+  TOP_LEFT: "flex-start,flex-start",
+  TOP_CENTER: "center,flex-start",
+  TOP_RIGHT: "flex-end,flex-start",
+  CENTER_LEFT: "flex-start,center",
+  CENTER_CENTER: "center,center",
+  CENTER_RIGHT: "flex-end,center",
+  BOTTOM_LEFT: "flex-start,flex-end",
+  BOTTOM_CENTER: "center,flex-end",
+  BOTTOM_RIGHT: "flex-end,flex-end",
 } as const;
 
 export type RatioType = z.infer<typeof RatioSchema>;
