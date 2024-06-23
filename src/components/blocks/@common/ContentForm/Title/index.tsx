@@ -5,18 +5,36 @@ import { ThumbnailFormType } from "@/forms/types";
 import styled from "@emotion/styled";
 import { Controller, useFormContext } from "react-hook-form";
 
+const NUMBER_REGEX = "/[^0-9]/g";
+
 export default function Title() {
-  const { register, control } = useFormContext<ThumbnailFormType>();
+  const { control } = useFormContext<ThumbnailFormType>();
 
   return (
     <>
       <Typography variant="sh4">제목</Typography>
       <Block>
-        <Textfield style={{ flex: 1 }} {...register("content.title.value")} />
-        <Textfield
-          style={{ width: 32 }}
-          type="number"
-          {...register("content.title.size")}
+        <Controller
+          control={control}
+          name="content.title.value"
+          render={({ field: { value, onChange } }) => (
+            <Textfield style={{ flex: 1 }} value={value} onChange={onChange} />
+          )}
+        />
+        <Controller
+          control={control}
+          name="content.title.size"
+          render={({ field: { value, onChange } }) => (
+            <Textfield
+              type="number"
+              style={{ width: 32 }}
+              value={value}
+              onChange={(e) => {
+                const parseValue = e.target.value.replace(NUMBER_REGEX, "");
+                onChange(Number(parseValue));
+              }}
+            />
+          )}
         />
       </Block>
       <Controller

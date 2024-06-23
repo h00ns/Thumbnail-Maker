@@ -5,21 +5,36 @@ import { ThumbnailFormType } from "@/forms/types";
 import styled from "@emotion/styled";
 import { Controller, useFormContext } from "react-hook-form";
 
-export default function SubTitle() {
-  const { register, control } = useFormContext<ThumbnailFormType>();
+const NUMBER_REGEX = "/[^0-9]/g";
+
+export default function Title() {
+  const { control } = useFormContext<ThumbnailFormType>();
 
   return (
     <>
       <Typography variant="sh4">부제목</Typography>
       <Block>
-        <Textfield
-          style={{ flex: 1 }}
-          {...register("content.subTitle.value")}
+        <Controller
+          control={control}
+          name="content.subTitle.value"
+          render={({ field: { value, onChange } }) => (
+            <Textfield style={{ flex: 1 }} value={value} onChange={onChange} />
+          )}
         />
-        <Textfield
-          style={{ width: 32 }}
-          type="number"
-          {...register("content.subTitle.size")}
+        <Controller
+          control={control}
+          name="content.subTitle.size"
+          render={({ field: { value, onChange } }) => (
+            <Textfield
+              type="number"
+              style={{ width: 32 }}
+              value={value}
+              onChange={(e) => {
+                const parseValue = e.target.value.replace(NUMBER_REGEX, "");
+                onChange(Number(parseValue));
+              }}
+            />
+          )}
         />
       </Block>
       <Controller
