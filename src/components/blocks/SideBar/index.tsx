@@ -7,6 +7,7 @@ import Button from "@/components/atoms/Button";
 import BackgroundForm from "../@common/BackgroundForm";
 import FormCard from "./FormCard";
 import ContentForm from "../@common/ContentForm";
+import { gray } from "@/styles/Color";
 
 export default function SideBar() {
   const [, setSelectIdx] = useAtom(SelectIdxAtom);
@@ -47,6 +48,7 @@ const Wrap = styled.div`
   height: 100%;
   padding: 12px 16px;
   box-shadow: ${Shadow.SMALL};
+  background: ${gray.gray1};
   overflow-y: auto;
 
   display: flex;
