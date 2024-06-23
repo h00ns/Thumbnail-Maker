@@ -40,8 +40,9 @@ export default function Preview() {
 
   return (
     <Wrap ref={ref}>
-      <div id="thumbnail">
+      <div>
         <ThumbnailPreview
+          id="thumbnail"
           style={{
             width,
             height,

@@ -5,6 +5,14 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import LogoImg from "@/assets/Logo.png";
 
+const CLONED_THUMBNAIL_STYLE = {
+  transform: "scale(1)",
+  position: "absolute",
+  zIndex: "-999",
+  top: "0",
+  left: "0",
+};
+
 export default function Header() {
   /** 썸네일 다운로드 */
   const handleDownloadThumbnail = () => {
@@ -14,9 +22,19 @@ export default function Header() {
       return;
     }
 
-    domtoimage.toBlob(thumbnail).then((blob) => {
-      saveAs(blob, "Thumbnail.png");
-    });
+    const clonedThumbnail = thumbnail?.cloneNode(true) as HTMLElement;
+    Object.assign(clonedThumbnail.style, CLONED_THUMBNAIL_STYLE);
+
+    document.body.appendChild(clonedThumbnail);
+
+    domtoimage
+      .toBlob(clonedThumbnail)
+      .then((blob) => {
+        saveAs(blob, "Thumbnail.png");
+      })
+      .finally(() => {
+        document.body.removeChild(clonedThumbnail);
+      });
   };
 
   return (
