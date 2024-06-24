@@ -12,11 +12,13 @@ export const thumbnailFormDefaultValues: ThumbnailFormType = {
       value: "썸네일 만들기!",
       size: 104,
       color: "#34963C",
+      stroke: "#715c5c",
     },
     subTitle: {
       value: "편하고, 간편하게!",
       size: 54,
       color: "#6ebbe6",
+      stroke: "#908ab0",
     },
   },
 };

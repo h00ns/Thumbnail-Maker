@@ -31,11 +31,13 @@ export const ContentSchema = z.object({
     value: z.string(),
     size: z.number(),
     color: z.string(),
+    stroke: z.string(),
   }),
   subTitle: z.object({
     value: z.string(),
     size: z.number(),
     color: z.string(),
+    stroke: z.string(),
   }),
 });
 
