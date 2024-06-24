@@ -22,6 +22,7 @@ export default function Header() {
       return;
     }
 
+    // preview는 scale을 조절하여 보여줌으로, 클론하여 scale을 1로 맞춰준뒤 다운로드
     const clonedThumbnail = thumbnail?.cloneNode(true) as HTMLElement;
     Object.assign(clonedThumbnail.style, CLONED_THUMBNAIL_STYLE);
 

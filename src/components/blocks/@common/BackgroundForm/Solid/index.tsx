@@ -23,6 +23,7 @@ export default function Solid({ handleBackgroundType }: Props) {
         <Radio value={"solid"} checked={isChecked} />
         <Typography>단일 색상</Typography>
       </Title>
+
       {isChecked && (
         <Controller
           name="background.value"

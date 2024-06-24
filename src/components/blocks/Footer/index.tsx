@@ -22,6 +22,7 @@ export default function Footer() {
     <>
       <ProgressBar value={percent} />
       <Wrap>
+        {/* 해상도 form */}
         {selectIdx === 1 && (
           <FormSection idx={1} title="해상도">
             <ContentWrap>
@@ -32,6 +33,7 @@ export default function Footer() {
           </FormSection>
         )}
 
+        {/* 배경 form */}
         {selectIdx === 2 && (
           <FormSection idx={2} title="배경">
             <ContentWrap>
@@ -54,6 +56,7 @@ export default function Footer() {
           </FormSection>
         )}
 
+        {/* 배경 form */}
         {selectIdx === 3 && (
           <FormSection idx={3} title="내용">
             <ContentWrap>
