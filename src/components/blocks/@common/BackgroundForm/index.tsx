@@ -10,6 +10,7 @@ import { useFormContext } from "react-hook-form";
 import { ThumbnailFormType } from "@/forms/types";
 
 export const INITIAL_BACKGROUND = "#ffffff";
+const INITIAL_GRADATION = "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)";
 
 export default function BackgroundForm() {
   const { setValue } = useFormContext<ThumbnailFormType>();
@@ -24,10 +25,7 @@ export default function BackgroundForm() {
       setValue("background.value", INITIAL_BACKGROUND);
     }
     if (value === "gradation") {
-      setValue(
-        "background.value",
-        "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)"
-      );
+      setValue("background.value", INITIAL_GRADATION);
     }
     if (value === "image") {
       setValue("background.value", INITIAL_BACKGROUND);

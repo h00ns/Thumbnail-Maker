@@ -21,6 +21,7 @@ export default function Gradation({ handleBackgroundType }: Props) {
         <Radio value={"gradation"} checked={isChecked} />
         <Typography>그라데이션</Typography>
       </Title>
+
       {isChecked && (
         <GradationItemWrap>
           <GradationItem value="linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)" />

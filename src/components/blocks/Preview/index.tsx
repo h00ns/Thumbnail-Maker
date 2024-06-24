@@ -18,21 +18,21 @@ export default function Preview() {
   });
 
   const { value: backgroundValue, border } = background;
-  const { position, title, subTitle } = content;
+  const { title, subTitle } = content;
+  const [justifyContent, alignItems] = content.position.split(",");
 
   const { width, height, scale, aspectRatio } = useGetSize(ref);
-  const [justifyContent, alignItems] = position.split(",");
-
-  // base64 포함시 이미지로 판단
-  const backgroundKey = backgroundValue.includes("base64")
-    ? "backgroundImage"
-    : "background";
 
   const textAlign: Record<string, "left" | "center" | "right"> = {
     "flex-start": "left",
     center: "center",
     "flex-end": "right",
   };
+
+  // base64 포함시 이미지로 판단
+  const backgroundKey = backgroundValue.includes("base64")
+    ? "backgroundImage"
+    : "background";
 
   return (
     <Wrap ref={ref}>

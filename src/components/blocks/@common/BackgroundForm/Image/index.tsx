@@ -34,6 +34,7 @@ export default function Image({ handleBackgroundType }: Props) {
         <Radio value={"image"} checked={isChecked} />
         <Typography>이미지</Typography>
       </Title>
+
       {isChecked && (
         <>
           {background === INITIAL_BACKGROUND ? (

@@ -1,10 +1,9 @@
-import { SelectIdxAtom } from "@/store";
+import { SelectIdxAtom, SelectIdxType } from "@/store";
 import { blue, white } from "@/styles/Color";
 import { Radius } from "@/styles/Radius";
 import { Shadow } from "@/styles/Shadow";
 import styled from "@emotion/styled";
 import { useAtom } from "jotai";
-import { SelectIdxType } from "@/store/types";
 import Divider from "@/components/atoms/Divider";
 import Typography from "@/components/atoms/Typography";
 

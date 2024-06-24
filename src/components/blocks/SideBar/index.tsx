@@ -14,6 +14,7 @@ export default function SideBar() {
 
   return (
     <Wrap>
+      {/* 해상도 form */}
       <FormCard idx={1} title="해상도">
         <RatioForm />
 
@@ -25,6 +26,7 @@ export default function SideBar() {
         />
       </FormCard>
 
+      {/* 배경 form */}
       <FormCard idx={2} title="배경">
         <BackgroundForm />
 
@@ -36,6 +38,7 @@ export default function SideBar() {
         />
       </FormCard>
 
+      {/* 내용 form */}
       <FormCard idx={3} title="내용">
         <ContentForm />
       </FormCard>
