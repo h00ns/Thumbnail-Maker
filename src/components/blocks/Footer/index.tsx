@@ -7,6 +7,7 @@ import BackgroundForm from "../@common/BackgroundForm";
 import ContentForm from "../@common/ContentForm";
 import ProgressBar from "@/components/atoms/ProgressBar";
 import RatioForm from "../@common/RatioForm";
+import { gray } from "@/styles/Color";
 
 export default function Footer() {
   const [selectIdx, setSelectIdx] = useAtom(SelectIdxAtom);
@@ -69,6 +70,7 @@ export default function Footer() {
 
 const Wrap = styled.div`
   padding: 12px 16px;
+  background: ${gray.gray1};
 `;
 
 const ContentWrap = styled.div`

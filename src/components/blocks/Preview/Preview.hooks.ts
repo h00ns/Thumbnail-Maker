@@ -1,10 +1,13 @@
 import { Ratio, ThumbnailFormType } from "@/forms/types";
+import { useResponsive } from "@/hooks/utils/useResponsive";
 import { RefObject, useEffect, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 
 export const useGetSize = (ref: RefObject<HTMLDivElement>) => {
   const { control } = useFormContext<ThumbnailFormType>();
   const ratio = useWatch({ control, name: "ratio" });
+
+  const { isPc } = useResponsive();
 
   const [scale, setScale] = useState(1);
 
@@ -29,7 +32,7 @@ export const useGetSize = (ref: RefObject<HTMLDivElement>) => {
 
       const PC_PADDING = 112;
       const MOBILE_PADDING = 24;
-      const PADDING = refWidth > 480 ? PC_PADDING : MOBILE_PADDING;
+      const PADDING = isPc ? PC_PADDING : MOBILE_PADDING;
 
       const availableWidth = refWidth - PADDING * 2;
       const availableHeight = refHeight - PADDING * 2;
@@ -45,7 +48,7 @@ export const useGetSize = (ref: RefObject<HTMLDivElement>) => {
     return () => {
       removeEventListener("resize", handleResize);
     };
-  }, [ref, originWidth, originHeight]);
+  }, [ref, originWidth, originHeight, isPc]);
 
   return { width: originWidth, height: originHeight, scale, aspectRatio };
 };

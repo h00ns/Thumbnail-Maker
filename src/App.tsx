@@ -12,6 +12,7 @@ import { ThumbnailFormType } from "./forms/types";
 import { thumbnailFormDefaultValues } from "./forms/states";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ThumbnailFormSchema } from "./forms/schema";
+import { useResponsive } from "./hooks/utils/useResponsive";
 
 function App() {
   const method = useForm<ThumbnailFormType>({
@@ -30,19 +31,13 @@ function App() {
 export default App;
 
 function Content() {
+  const { isPc } = useResponsive();
+
   return (
     <ContentWrap>
       <Preview />
 
-      {/* only PC */}
-      <SideBarWrap>
-        <SideBar />
-      </SideBarWrap>
-
-      {/* only Mobile */}
-      <FooterWrap>
-        <Footer />
-      </FooterWrap>
+      {isPc ? <SideBar /> : <Footer />}
     </ContentWrap>
   );
 }
@@ -54,19 +49,5 @@ const ContentWrap = styled.div`
 
   ${mq["md"]} {
     flex-direction: column;
-  }
-`;
-
-const SideBarWrap = styled.div`
-  ${mq["md"]} {
-    display: none;
-  }
-`;
-
-const FooterWrap = styled.div`
-  display: none;
-
-  ${mq["md"]} {
-    display: block;
   }
 `;

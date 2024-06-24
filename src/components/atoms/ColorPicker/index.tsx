@@ -6,8 +6,8 @@ import { useRef, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import Typography from "../Typography";
 import { useOutsideClick } from "@/hooks/interaction/useOutsideClick";
-import { mq } from "@/styles/Breakpoint";
 import Button from "../Button";
+import { useResponsive } from "@/hooks/utils/useResponsive";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
@@ -19,6 +19,8 @@ export default function ColorPicker({
   handleChange,
   ...divHtmlAttributes
 }: Props) {
+  const { isPc } = useResponsive();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -38,15 +40,21 @@ export default function ColorPicker({
 
       {isOpen && (
         <>
-          <PcPaletteWrap>
-            <HexColorPicker color={value} onChange={handleChange} />
-          </PcPaletteWrap>
+          {isPc ? (
+            <PcPaletteWrap>
+              <HexColorPicker color={value} onChange={handleChange} />
+            </PcPaletteWrap>
+          ) : (
+            <MobilePaletteWrap>
+              <HexColorPicker color={value} onChange={handleChange} />
 
-          <MobilePaletteWrap>
-            <HexColorPicker color={value} onChange={handleChange} />
-
-            <Button style={{ width: 200 }} text="선택" onClick={handleClick} />
-          </MobilePaletteWrap>
+              <Button
+                style={{ width: 200 }}
+                text="선택"
+                onClick={handleClick}
+              />
+            </MobilePaletteWrap>
+          )}
         </>
       )}
     </Container>
@@ -91,28 +99,20 @@ const PcPaletteWrap = styled.div`
   position: absolute;
   top: 40px;
   left: 0;
-
-  ${mq["md"]} {
-    display: none;
-  }
 `;
 
 const MobilePaletteWrap = styled.div`
-  display: none;
-
   width: 100%;
   padding: 12px 16px;
   background: ${white};
   box-shadow: ${Shadow.MEDIUM};
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
   position: fixed;
   bottom: 0;
   left: 0;
-
-  ${mq["md"]} {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
 `;
