@@ -56,10 +56,16 @@ export default function Preview() {
             }}
           >
             <TextWrap>
-              <Text style={{ fontSize: title.size, color: title.color }}>
+              <Text
+                style={{ fontSize: title.size, color: title.color }}
+                stroke={title.stroke}
+              >
                 {title.value}
               </Text>
-              <Text style={{ fontSize: subTitle.size, color: subTitle.color }}>
+              <Text
+                style={{ fontSize: subTitle.size, color: subTitle.color }}
+                stroke={subTitle.stroke}
+              >
                 {subTitle.value}
               </Text>
             </TextWrap>
@@ -107,7 +113,13 @@ const TextWrap = styled.div`
   gap: 16px;
 `;
 
-const Text = styled.p`
+const Text = styled.p<{ stroke?: string }>`
   margin: 0;
   font-weight: bold;
+
+  ${({ stroke }) =>
+    stroke &&
+    `
+    -webkit-text-stroke: 4px ${stroke};
+  `}
 `;

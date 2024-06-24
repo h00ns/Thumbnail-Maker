@@ -9,13 +9,17 @@ import { useOutsideClick } from "@/hooks/interaction/useOutsideClick";
 import Button from "../Button";
 import { useResponsive } from "@/hooks/utils/useResponsive";
 
+type PaletteAlignType = "left" | "right";
+
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
+  paletteAlign?: PaletteAlignType;
   handleChange: (color: string) => void;
 }
 
 export default function ColorPicker({
   value,
+  paletteAlign = "left",
   handleChange,
   ...divHtmlAttributes
 }: Props) {
@@ -41,7 +45,7 @@ export default function ColorPicker({
       {isOpen && (
         <>
           {isPc ? (
-            <PcPaletteWrap>
+            <PcPaletteWrap paletteAlign={paletteAlign}>
               <HexColorPicker color={value} onChange={handleChange} />
             </PcPaletteWrap>
           ) : (
@@ -89,7 +93,7 @@ const Circle = styled.div`
   border-radius: ${Radius.MAXIMUM};
 `;
 
-const PcPaletteWrap = styled.div`
+const PcPaletteWrap = styled.div<{ paletteAlign: PaletteAlignType }>`
   padding: 12px 16px;
   background: ${white};
   border-radius: ${Radius.MEDIUM};
@@ -98,7 +102,21 @@ const PcPaletteWrap = styled.div`
 
   position: absolute;
   top: 40px;
-  left: 0;
+
+  ${({ paletteAlign }) => {
+    switch (paletteAlign) {
+      case "left": {
+        return `
+          left: 0;
+        `;
+      }
+      case "right": {
+        return `
+          right: 0;
+        `;
+      }
+    }
+  }}
 `;
 
 const MobilePaletteWrap = styled.div`

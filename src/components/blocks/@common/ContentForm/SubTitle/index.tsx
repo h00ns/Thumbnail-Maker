@@ -37,13 +37,28 @@ export default function Title() {
           )}
         />
       </Block>
-      <Controller
-        control={control}
-        name="content.subTitle.color"
-        render={({ field: { value, onChange } }) => (
-          <ColorPicker value={value} handleChange={onChange} />
-        )}
-      />
+
+      <Block>
+        <Controller
+          control={control}
+          name="content.subTitle.color"
+          render={({ field: { value, onChange } }) => (
+            <ColorPicker value={value} handleChange={onChange} />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="content.subTitle.stroke"
+          render={({ field: { value, onChange } }) => (
+            <ColorPicker
+              value={value}
+              handleChange={onChange}
+              paletteAlign="right"
+            />
+          )}
+        />
+      </Block>
     </>
   );
 }
